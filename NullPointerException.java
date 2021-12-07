@@ -1,11 +1,27 @@
-package trainingProjects;
-
-public class NullPointerException {
-	int arr[]=null;
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		NullPointerException dummy = new NullPointerException();
-		System.out.println(dummy.arr.length);
-	}
-
+package exceptionHandling;
+import java.util.Scanner;
+public class NullPointerExp
+{
+public static void main(String[] args)
+{
+try
+{
+int arr[]=null;
+System.out.println(arr.length);
+// Scanner sc = null;
+// System.out.println(sc.nextInt());
+// if(sc.equals(sc.nextInt()))
+// {
+// System.out.println("enter the data: ");
+// }
+// else
+// {
+// System.out.println("Print the exception: ");
+// }
+}
+catch(NullPointerException ex)
+{
+System.err.println("Null Pointer exception occurs:");
+}
+}
 }
