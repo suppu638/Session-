@@ -1,0 +1,57 @@
+package model;
+import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class BookManager {
+
+	List<Book> bookList=null;
+	public void addBooks()
+	{
+		Book bs=new Book("The Push",500 ,"ASHLEY AUDRAIN","fiction");
+		Book bs2=new Book("A Crooked Tree",600,"UNA MANNION","fiction");
+		Book bs3=new Book("The Wife Upstairs",300,"ST. MARTIN'S PRESS","fiction");
+		Book bs4=new Book("Summerwater",200,"SARAH MOSS","fiction");
+		Book bs5=new Book("The Catcher In The Rye",700,"J.D Salinger","comedy");
+		Book bs6=new Book("Me Talk Pretty One Day",800,"David Sedaris","comedy");
+	
+		bookList=Arrays.asList(bs,bs2,bs3,bs4,bs5,bs6);
+		}
+	
+	
+	public List<Book> getBookbyCategory(String categoryName)
+	{
+		Predicate<Book> bookList1=input->input.getCategory().equalsIgnoreCase(categoryName);
+		return bookList.stream().filter(bookList1).collect(Collectors.toList());
+		
+		
+	}
+	public List<Book> applyDiscountByCategoryAndPercentage(String categoryName,float discountPercentage)
+	{
+		Predicate<Book> bookList1=input->input.getCategory().equalsIgnoreCase(categoryName);
+		return bookList.stream()
+				.filter(bookList1)
+				.map(book->book.withDiscountedPrice(discountPercentage))
+			.collect(Collectors.toList());
+				
+			}
+	public List<String> getBookNames()
+	{
+	
+		return bookList.stream().map(Book::getBookName).collect(Collectors.toList());
+	}
+public List<Book> getCheapestBookInstore(int limit)
+{
+	return bookList.stream().sorted().limit(limit).collect(Collectors.toList());
+	
+}
+public Optional<Float> getMaxPrice()
+{
+	BookComparator bookComparator=new BookComparator();
+	return bookList.stream().max(bookComparator).map(Book::getBookPrice);
+}
+}
+
+
